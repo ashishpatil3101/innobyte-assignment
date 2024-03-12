@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 import validator from 'validator';
+import bcrypt from 'bcrypt'
+
 
 const userSchema = new mongoose.Schema({
     email: {
@@ -20,7 +22,8 @@ const userSchema = new mongoose.Schema({
     },
     userName:{
         type: String,
-        trim: true
+        trim: true,
+        unique: true
     }
 });
 
