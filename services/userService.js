@@ -4,6 +4,7 @@ import validator from 'validator';
 import User from '../models/User.js'
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import emailService from './emailService.js';
 
 
 class userService {
@@ -31,7 +32,9 @@ class userService {
             userName
         });
         await newUser.save();
-        return {data: {email}, message: 'User registered successfully.', status: 201};
+        //SEND EMAIL
+        await emailService(email);
+        return {data: {email}, message: 'User registered successfully. Confirmation email is sent to registered email-id.', status: 201};
     }
 
     async login(req, res){
@@ -66,7 +69,32 @@ class userService {
         });
         return {data:{email: userExist.email, token: token}, message: 'User logged in successfully', status: 200};
     }
-}
 
+    async getProfile(req){
+        const userId=req.userId;
+        const userExist=await User.findById(userId);
+        if(!userExist) return {data:null, message: "User does not exist.", status: 400};
+        const resObj={
+            email: userExist.email,
+            userName: userExist.userName
+        };
+        return {data: resObj, message: "User data retrieved successfully.", status: 200}
+    }
+
+    async confirmEmail(req){
+        try {
+            const {token}=req.params;
+            const decoded = jwt.verify(token, process.env.SECRET_KEY);
+            const email=decoded.email;
+            const userExist=await User.findOne({email});
+            if(!userExist)return{data: null, message: 'EMail confirmation failed. Please try registering again', status:400};
+           //update user
+           await User.findOneAndUpdate({email}, {"emailVerified": true});
+           return {data: userExist.email, message: 'Email confirmed successfully.', status:400};
+        } catch (error) {
+            return {data: null, message: "Email confirmation failed.", status: 400}
+        }
+    }
+}
 
 export default new userService();

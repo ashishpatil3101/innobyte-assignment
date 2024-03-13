@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 import validator from 'validator';
 import bcrypt from 'bcrypt'
 
-
 const userSchema = new mongoose.Schema({
     email: {
         type: String,
@@ -24,9 +23,12 @@ const userSchema = new mongoose.Schema({
         type: String,
         trim: true,
         unique: true
+    },
+    emailVerified: {
+        type: Boolean,
+        default: false
     }
 });
-
 
 userSchema.pre('save', async function (next) {
     if (this.isModified('password')) {
