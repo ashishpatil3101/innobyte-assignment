@@ -13,7 +13,6 @@ const signup=async(req, res, next)=>{
         if(data.data !== null) res.status(201).send(sendResponse(data.message, data.data));
         else next(createError(data.status, data.message));
     } catch (error) {
-        console.log(error)
         next(createError(500, error.message));
     }
 }

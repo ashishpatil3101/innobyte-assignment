@@ -26,7 +26,7 @@ const sendEmail = (to)=>{
     );     
     const confirmationLink=process.env.EMAIL_CONFIRMATION_LINK+token;
     const mailConfigurations = { 
-        from: '"abc company 👻"', 
+        from: '"abc company 👻" <s@gamail.email>', 
         to: to, 
         template: "email", // the name of the template file, i.e., email.handlebars
         subject: 'Email Confirmation', 
@@ -38,7 +38,6 @@ const sendEmail = (to)=>{
         console.log("error", error)
         if (error) throw Error(error); 
         console.log('Email Sent Successfully'); 
-        console.log(info); 
     }); 
 }
 
