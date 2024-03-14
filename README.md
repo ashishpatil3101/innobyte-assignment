@@ -14,7 +14,7 @@ This repository contains the backend code
 
 1. Clone the repository to your local machine:
 
-- `git clone <https://github.com/ashishpatil3101/innobyte-assignment.git>`
+- `git clone https://github.com/ashishpatil3101/innobyte-assignment.git`
 - Navigate to the project directory
 
 ### Install dependencies
