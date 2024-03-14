@@ -14,18 +14,18 @@ This repository contains the backend code
 
 1. Clone the repository to your local machine:
 
--git clone <https://github.com/ashishpatil3101/innobyte-assignment.git>
--Navigate to the project directory
+- `git clone <https://github.com/ashishpatil3101/innobyte-assignment.git>`
+- Navigate to the project directory
 
 ### Install dependencies
-- npm install
+- `npm install`
 
 ### Set up environment variables
--create .env file in root directory 
--paste env variables from .env-example file  and add value to it
+- create .env file in root directory.
+- paste env variables from .env-example file  and assign value to it
 
 ### Running the Server
--npm start
+- `npm start`
 
 ### API Information
 
